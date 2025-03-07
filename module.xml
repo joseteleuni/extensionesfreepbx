@@ -1,0 +1,30 @@
+
+<module>
+  <rawname>anexosinfopyme</rawname>
+  <repo>standard</repo>
+  <name>UCP Anexosinfopyme</name>
+  <description>This is an example UCP application. It is meant as a reference tool and may or may not functionally do anything useful</description>
+  <category>Applications</category>
+  <version>15.0.37</version>
+  <publisher>Sangoma Technologies Corporation</publisher>
+  <license>AGPLv3</license>
+  <licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
+  <changelog>*15.0.37* Initial release</changelog>
+  <menuitems>
+    <anexosinfopyme>Anexosinfopyme</anexosinfopyme>
+  </menuitems>
+  <hooks>
+    <ucp class="Ucp">
+      <method namespace="FreePBX\Modules" class="Anexosinfopyme" callingMethod="constructModuleConfigPages">ucpConfigPage</method>
+      <method namespace="FreePBX\Modules" class="Anexosinfopyme" callingMethod="addUser">ucpAddUser</method>
+      <method namespace="FreePBX\Modules" class="Anexosinfopyme" callingMethod="updateUser">ucpUpdateUser</method>
+      <method namespace="FreePBX\Modules" class="Anexosinfopyme" callingMethod="delUser">ucpDelUser</method>
+      <method namespace="FreePBX\Modules" class="Anexosinfopyme" callingMethod="addGroup">ucpAddGroup</method>
+      <method namespace="FreePBX\Modules" class="Anexosinfopyme" callingMethod="updateGroup">ucpUpdateGroup</method>
+      <method namespace="FreePBX\Modules" class="Anexosinfopyme" callingMethod="delGroup">ucpDelGroup</method>
+    </ucp>
+  </hooks>
+  <supported>
+    <version>14.0</version>
+  </supported>
+</module>

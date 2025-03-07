@@ -1,0 +1,20 @@
+{
+    "name": "jose/freepbxmodule",
+    "description": "Modulo para Infopyme",
+    "type": "project",
+    "require": {
+        "marcelog/pami": "2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Jose\\Freepbxmodule\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jose L."
+        }
+    ],
+    "minimum-stability": "dev"
+}
