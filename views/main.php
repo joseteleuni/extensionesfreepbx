@@ -6,9 +6,31 @@ require_once('/etc/freepbx.conf');
 // Load AMI
 global $astman;
 
+//DB 
+global $db;
+
+$extens = [];
+
+$sql_0 = "SELECT * FROM users"; //Muestra las extensiones
+$users = $db->getAll($sql_0, DB_FETCHMODE_ASSOC);
+
+//echo var_dump($users);
+
+foreach($users as $user){
+    $extens[$user['extension']]=$user['name'];
+}
+
+//echo $extens["217"];
+//echo var_dump(array_keys($extens));
+//echo var_dump(array_values($extens));
+//$columna_extens = array_column($extens, "extension");
+
 $status = [];
 
-$test = get_class_methods($astman); 
+$class_astman = get_class_methods($astman);
+$class_db = get_class_methods($db);
+
+//echo var_dump($class_db);
 //echo var_dump($test);
 $ends = [];
 $endpoints = $astman->PJSIPShowEndpoints();
@@ -40,9 +62,9 @@ foreach ($regStatuses as $contact) {
 //    echo $end."\n";
 //}
 
-foreach ($ends as $ext) {
-    $estado = isset($regs[$ext]) ? $regs[$ext] : "Inalcanzable";
-    $status[] = ["Extension" => $ext, "Status" => $estado];
+foreach (array_keys($extens) as $ext) {
+    $estado = isset($regs[$ext]) ? "CONECTADO" : "DESCONECTADO";
+    $status[] = ["Extension" => $ext , "Nombre" => $extens[$ext],"Status" => $estado];
 }	
 
 
@@ -70,7 +92,10 @@ echo "<style>
 
 echo "<h1>Estado de las extensiones</h1> <br>";
 echo "<table>";
-echo "<tr><th style='width: 10%;'>Item</th><th style='width: 40%;'>Extensión</th><th style='width: 50%;'>Estado</th></tr>";
+echo "<tr><th style='width: 10%;'>Item</th>
+      <th style='width: 30%;'>Extensión</th>
+      <th style='width: 30%;'>Nombre</th>
+      <th style='width: 30%;'>Estado</th></tr>";
 
 $contador = 1;
 
@@ -78,6 +103,7 @@ foreach ($status as $entry) {
     echo "<tr>";
     echo "<td>" . $contador . "</td>";
     echo "<td>" . $entry["Extension"] . "</td>";
+    echo "<td>" . $entry["Nombre"] . "</td>";
     echo "<td>" . $entry["Status"] . "</td>";
     echo "</tr>";
     $contador++;
